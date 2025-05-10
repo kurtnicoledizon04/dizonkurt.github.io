@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KATTIE'S SWEET BITES</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8e8d9;
+            text-align: center;
+        }
+        .hero {
+            background-color: brown;
+            color: rgb(255, 255, 255);
+            padding: 50px;
+        }
+        .hero h1 {
+            margin: 0;
+        }
+        .hero button {
+            background-color: white;
+            color: #d35400;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 18px;
+            border-radius: 5px;
+        }
+        .hero button:hover {
+            background-color:grey;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            background-color: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 200px;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        button {
+            background-color: #e67e22;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: grey;
+        }
+        .cart {
+            margin-top: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .order-confirmation {
+            display: none;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="showAbout()">About Us</button>
+    <div class="container" id="about-section" style="display: none;">
+        <h1>About Us</h1>
+        <p>Welcome to Kattie's Sweet Bites! 🍩</p>
+        <p>We are dedicated to creating the tastiest, freshest, craziest donut you will ever eat. Whether it's abeloved classic, or a one-of-a-kind seasonal special, we fill every bite with love..</p>
+        <p>Founded by Kattie, who has loved and adored dessert her whole life, we wanted to put a little sweetness in your day with every order placed. Thank you for supporting my small business!</p>
+        <button onclick="goBack()">Back to Home</button>
+    </div>
+    <button onclick="showContact()">Contact Us</button>
+    <div class="container" id="contact-section" style="display: none;">
+        <h1>Contact Us</h1>
+        <p>We'd love to hear from you! Please reach out using the details below.</p>
+        <p><strong>Email:</strong> kattiesweetbites@gmail.com</p>
+        <p><strong>Phone:</strong> (+63)9766134913</p>
+        <p><strong>Address:</strong>204 Purok 2 Magao, Concepcion, Tarlac</p>
+        <p>Or message us directly using the form below:</p>
+        <form onsubmit="submitContactForm(event)">
+            <input type="text" placeholder="Your Name" required style="padding: 10px; width: 80%; margin-bottom: 10px;"><br>
+            <input type="email" placeholder="Your Email" required style="padding: 10px; width: 80%; margin-bottom: 10px;"><br>
+            <textarea placeholder="Your Message" required style="padding: 10px; width: 80%; height: 100px;"></textarea><br>
+            <button type="submit">Send Message</button>
+        </form>
+        <p id="contact-response" style="margin-top: 10px; color: green;"></p>
+        <button onclick="goBack()">Back to Home</button>
+    </div>
+    
+    <div class="hero">
+        <h1>Kattie's Sweet Bites</h1>
+        <p>Click "Order Now" to choose your donuts, or "Admin Panel" to manage orders. 😊</p>
+        <button onclick="startOrdering()">Order Now</button>
+        <button onclick="openAdminPanel()">Admin Panel</button>
+    </div>
+    
+    <div class="container" id="order-section" style="display: none;">
+        <h1>Order Your Favorite Donuts</h1>
+        <div class="products">
+            <div class="product">
+                <img src="choco_loco-removebg-preview.png" alt="Choco loco">
+                <h3>Choco Loco</h3>
+                <p>$2.50</p>
+                <button onclick="addToCart('Choco Loco', 2.50)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="berry sprinkle.jpg" alt="Berry Sprinkle">
+                <h3>Berry Sprinle</h3>
+                <p>$2.75</p>
+                <button onclick="addToCart('Berry Sprinkle', 2.75)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="sweet_glaze-removebg-preview.png" alt="Sweet Glaze">
+                <h3>Sweet Glaze</h3>
+                <p>$2.00</p>
+                <button onclick="addToCart('Sweet Glaze', 2.)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="choco_prinkles-removebg-preview.png" alt="Choco Prinkles">
+                <h3>Choco Prinkles</h3>
+                <p>$2.50</p>
+                <button onclick="addToCart('Choco Prinkles', 2.)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="milky_sprinkles-removebg-preview.png" alt="Milky Sprinkles">
+                <h3>Milky Sprinkles</h3>
+                <p>$2.25</p>
+                <button onclick="addToCart('Milky Sprinkles', 2.25)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="milky_nuts-removebg-preview.png" alt="Milky Nuts">
+                <h3>Milky Nuts</h3>
+                <p>$2.40</p>
+                <button onclick="addToCart('Milky Nuts', 2.40)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="milky_drizzle-removebg-preview.png" alt="Milky Drizzle">
+                <h3>Milky Drizzle</h3>
+                <p>$2.70</p>
+                <button onclick="addToCart('Milky Drizzle', 2.70)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="milky_white-removebg-preview.png" alt="Milky White">
+                <h3>Milky White</h3>
+                <p>$2.35</p>
+                <button onclick="addToCart('Milky White', 2.35)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="package a.jpg" alt="Package A">
+                <h3>Package A (50pax)</h3>
+                <p>$10.00<br><small>Classic Mini Donuts</small></p>
+                <button onclick="addToCart('Package A', 10.00)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="package_b-removebg-preview.png" alt="Package B">
+                <h3>Package B (70pax)</h3>
+                <p>$18.00<br><small>Classic Mini Donuts</small></p>
+                <button onclick="addToCart('Package B', 18.00)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="package c.jpg" alt="Package C">
+                <h3>Package C (100pax)</h3>
+                <p>$25.00<br><small>Classic Mini Donuts</small></p>
+                <button onclick="addToCart('Package C', 25.00)">Add to Cart</button>
+            </div>
+            
+        </div>
+        
+        <div class="cart">
+            <h2>Shopping Cart</h2>
+            <ul id="cart-items"></ul>
+            <h3>Total: $<span id="total">0.00</span></h3>
+            <button onclick="checkout()">Checkout</button>
+        </div>
+    </div>
+
+    <div class="order-confirmation" id="order-confirmation">
+        <h2>Thank You for Your Order!</h2>
+        <p>Your delicious donuts are being prepared and will be ready soon.</p>
+        <button onclick="goBack()">Back to Home</button>
+    </div>
+
+    <div class="container" id="admin-panel" style="display: none;">
+        <h1>Admin Panel - Orders</h1>
+        <div id="orders-list">
+            <p>No orders yet.</p>
+        </div>
+        <button onclick="goBack()">Back to Home</button>
+    </div>
+
+    <script>
+        let cart = [];
+        let orders = [];
+
+        function startOrdering() {
+            hideAll();
+            document.getElementById('order-section').style.display = 'block';
+            window.scrollTo({ top: document.getElementById('order-section').offsetTop, behavior: 'smooth' });
+        }
+
+        function addToCart(name, price) {
+            cart.push({ name, price });
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cart-items');
+            const totalElement = document.getElementById('total');
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+                cartItems.appendChild(li);
+                total += item.price;
+            });
+
+            totalElement.textContent = total.toFixed(2);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+            orders.push([...cart]); 
+            cart = [];
+            updateCart();
+            hideAll();
+            document.getElementById('order-confirmation').style.display = 'block';
+        }
+
+        function openAdminPanel() {
+            hideAll();
+            const ordersList = document.getElementById('orders-list');
+            if (orders.length === 0) {
+                ordersList.innerHTML = '<p>No orders yet.</p>';
+            } else {
+                ordersList.innerHTML = '';
+                orders.forEach((order, index) => {
+                    const div = document.createElement('div');
+                    div.style.borderBottom = '1px solid #ccc';
+                    div.style.marginBottom = '10px';
+                    const items = order.map(item => `${item.name} ($${item.price.toFixed(2)})`).join(', ');
+                    div.innerHTML = `<strong>Order ${index + 1}:</strong> ${items}`;
+                    ordersList.appendChild(div);
+                });
+            }
+            document.getElementById('admin-panel').style.display = 'block';
+        }
+
+        function goBack() {
+            hideAll();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function hideAll() {
+            document.getElementById('order-section').style.display = 'none';
+            document.getElementById('order-confirmation').style.display = 'none';
+            document.getElementById('admin-panel').style.display = 'none';
+        }
+        function showAbout() {
+    hideAll();
+    document.getElementById('about-section').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('about-section').offsetTop, behavior: 'smooth' });
+        }
+        function showContact() {
+    hideAll();
+    document.getElementById('contact-section').style.display = 'block';
+    window.scrollTo({ top: document.getElementById('contact-section').offsetTop, behavior: 'smooth' });
+        }
+
+    function submitContactForm(event) {
+    event.preventDefault();
+    document.getElementById('contact-response').textContent = "Thank you! We'll get back to you soon. 😊";
+        }
+        function hideAll() {
+    document.getElementById('order-section').style.display = 'none';
+    document.getElementById('order-confirmation').style.display = 'none';
+    document.getElementById('admin-panel').style.display = 'none';
+    document.getElementById('about-section').style.display = 'none';
+    document.getElementById('contact-section').style.display = 'none'; 
+        }
+        let contacts = [];
+        function submitContactForm(event) {
+    event.preventDefault();
+
+    const name = event.target[0].value;
+    const email = event.target[1].value;
+    const message = event.target[2].value;
+
+    contacts.push({ name, email, message });
+
+    document.getElementById('contact-response').textContent = "Thank you! We'll get back to you soon. 😊";
+
+    event.target.reset();
+        }
+        function openAdminPanel() {
+    hideAll();
+    const ordersList = document.getElementById('orders-list');
+    ordersList.innerHTML = '<h2>Orders</h2>';
+
+    if (orders.length === 0) {
+        ordersList.innerHTML += '<p>No orders yet.</p>';
+    } else {
+        orders.forEach((order, index) => {
+            const div = document.createElement('div');
+            div.style.borderBottom = '1px solid #ccc';
+            div.style.marginBottom = '10px';
+            const items = order.map(item => `${item.name} ($${item.price.toFixed(2)})`).join(', ');
+            div.innerHTML = `<strong>Order ${index + 1}:</strong> ${items}`;
+            ordersList.appendChild(div);
+        });
+    }
+
+    ordersList.innerHTML += '<h2 style="margin-top: 30px;">Contact Messages</h2>';
+    if (contacts.length === 0) {
+        ordersList.innerHTML += '<p>No contact messages yet.</p>';
+    } else {
+        contacts.forEach((contact, index) => {
+            const div = document.createElement('div');
+            div.style.borderBottom = '1px solid #ccc';
+            div.style.marginBottom = '10px';
+            div.innerHTML = `
+                <strong>Message ${index + 1}</strong><br>
+                <strong>Name:</strong> ${contact.name}<br>
+                <strong>Email:</strong> ${contact.email}<br>
+                <strong>Message:</strong> ${contact.message}
+            `;
+            ordersList.appendChild(div);
+        });
+    }
+
+    document.getElementById('admin-panel').style.display = 'block';
+        }
+    </script>
+</body>
